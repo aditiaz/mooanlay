@@ -18,5 +18,6 @@ func SubListRoutes(e *echo.Group) {
 	e.GET("/sublists", h.FindSubLists)
 	e.DELETE("/sublist/:id", h.DeleteSubList)
 	e.PATCH("/updatesublist/:id", middleware.UploadMultipleFile(h.UpdateSubList))
+	e.GET("/searchsublist", h.SearchSubLists)
 
 }

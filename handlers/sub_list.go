@@ -43,15 +43,21 @@ func (h *handlerSubList) FindSubLists(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: sublists})
 }
-
 func (h *handlerSubList) GetSubList(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
-
 	var sublist models.SubList
 	sublist, err := h.SubListRepository.GetSubList(id)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
 	}
+
+	postImageSubs, err := h.SubListRepository.GetPostImageSubs(id)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
+	}
+
+	// Assign the loaded PostImageSubs to the sublist
+	sublist.PostImageSub = postImageSubs
 
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: sublist})
 }
@@ -146,4 +152,55 @@ func (h *handlerSubList) UpdateSubList(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
 	}
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: data})
+}
+
+// func (h *handlerSubList) SearchSubLists(c echo.Context) error {
+// 	searchQuery := c.QueryParam("q")
+
+// 	if searchQuery == "" {
+// 		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: "Search query is required."})
+// 	}
+
+// 	lists, err := h.SubListRepository.SearchSubLists(searchQuery)
+// 	if err != nil {
+// 		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
+// 	}
+
+// 	response := struct {
+// 		Lists []models.SubList `json:"lists"`
+// 	}{
+// 		Lists: lists,
+// 	}
+
+// 	return c.JSON(http.StatusOK, response)
+// }
+
+func (h *handlerSubList) SearchSubLists(c echo.Context) error {
+	searchQuery := c.QueryParam("q")
+
+	if searchQuery == "" {
+		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: "Search query is required."})
+	}
+
+	sublists, err := h.SubListRepository.SearchSubLists(searchQuery)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
+	}
+
+	// Preload the PostImageSub relationship for each SubList
+	for i := range sublists {
+		postImageSubs, err := h.SubListRepository.GetPostImageSubs(sublists[i].ID)
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
+		}
+		sublists[i].PostImageSub = postImageSubs
+	}
+
+	response := struct {
+		SubLists []models.SubList `json:"sub_lists"`
+	}{
+		SubLists: sublists,
+	}
+
+	return c.JSON(http.StatusOK, response)
 }

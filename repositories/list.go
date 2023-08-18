@@ -12,6 +12,7 @@ type ListRepository interface {
 	CreateList(list models.List) (models.List, error)
 	UpdateList(list models.List) (models.List, error)
 	DeleteList(ID int) error
+	SearchLists(query string) ([]models.List, error)
 }
 
 func RepositoryList(db *gorm.DB) *repository {
@@ -22,6 +23,12 @@ func (r *repository) CreateList(list models.List) (models.List, error) {
 	err := r.db.Create(&list).Error
 
 	return list, err
+}
+func (r *repository) SearchLists(searchQuery string) ([]models.List, error) {
+	var lists []models.List
+	err := r.db.Where("title ILIKE ? OR deskripsi ILIKE ?", "%"+searchQuery+"%", "%"+searchQuery+"%").Find(&lists).Error
+
+	return lists, err
 }
 
 func (r *repository) GetList(ID int) (models.List, error) {

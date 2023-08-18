@@ -129,3 +129,24 @@ func (h *handlerList) UpdateList(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: data})
 }
+
+func (h *handlerList) SearchLists(c echo.Context) error {
+	searchQuery := c.QueryParam("q")
+
+	if searchQuery == "" {
+		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: "Search query is required."})
+	}
+
+	lists, err := h.ListRepository.SearchLists(searchQuery)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
+	}
+
+	response := struct {
+		Lists []models.List `json:"lists"`
+	}{
+		Lists: lists,
+	}
+
+	return c.JSON(http.StatusOK, response)
+}

@@ -14,6 +14,7 @@ type SubListRepository interface {
 	CreateSubList(list models.SubList) (models.SubList, error)
 	UpdateSubList(list models.SubList) (models.SubList, error)
 	DeleteSubList(ID int) error
+	SearchSubLists(query string) ([]models.SubList, error)
 }
 
 func RepositorySubList(db *gorm.DB) *repository {
@@ -35,7 +36,7 @@ func (r *repository) GetSubList(ID int) (models.SubList, error) {
 
 func (r *repository) GetPostImageSubs(ID int) ([]models.PostImageSub, error) {
 	var postImageSub []models.PostImageSub
-	err := r.db.Preload("PostImageSub").First(&postImageSub, ID).Error
+	err := r.db.Where("list_id = ?", ID).Find(&postImageSub).Error
 
 	return postImageSub, err
 }
@@ -61,4 +62,11 @@ func (r *repository) UpdateSubList(sublist models.SubList) (models.SubList, erro
 
 func (r *repository) DeleteSubList(ID int) error {
 	return r.db.Delete(&models.SubList{}, ID).Error
+}
+
+func (r *repository) SearchSubLists(searchQuery string) ([]models.SubList, error) {
+	var sublists []models.SubList
+	err := r.db.Where("title ILIKE ? OR deskripsi ILIKE ?", "%"+searchQuery+"%", "%"+searchQuery+"%").Find(&sublists).Error
+
+	return sublists, err
 }

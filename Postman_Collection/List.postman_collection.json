@@ -1,0 +1,368 @@
+{
+	"info": {
+		"_postman_id": "0f6d37d5-2708-4ffb-860c-ebafd8f1e5e2",
+		"name": "List",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21715301"
+	},
+	"item": [
+		{
+			"name": "Sublist",
+			"item": [
+				{
+					"name": "addSubList",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Rumah delapan",
+									"type": "text"
+								},
+								{
+									"key": "deskripsi",
+									"value": "Jakarta",
+									"type": "text"
+								},
+								{
+									"key": "list_id",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "post_image",
+									"type": "file",
+									"src": "/C:/Users/Aditia Aria Nugraha/OneDrive/Documents/CV/Aditia-CV.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/sublist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"sublist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allSubLists",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/sublists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"sublists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "onesub_list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/sublist/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"sublist",
+								"32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/sublist/28",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"sublist",
+								"28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Rumah dua delapan di upadte",
+									"type": "text"
+								},
+								{
+									"key": "deskripsi",
+									"value": "Jakarta",
+									"type": "text"
+								},
+								{
+									"key": "post_image",
+									"type": "file",
+									"src": "/C:/Users/Aditia Aria Nugraha/OneDrive/Documents/CV/Aditia-CV.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/updatesublist/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"updatesublist",
+								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List",
+			"item": [
+				{
+					"name": "addList",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Rumah Ret",
+									"type": "text"
+								},
+								{
+									"key": "deskripsi",
+									"value": "Jakarta",
+									"type": "text"
+								},
+								{
+									"key": "list_id",
+									"value": "8",
+									"type": "text"
+								},
+								{
+									"key": "post_image",
+									"type": "file",
+									"src": "/C:/Users/Aditia Aria Nugraha/OneDrive/Documents/CV/Aditia-CV.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/list/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"list",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allLists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/lists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"lists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/list/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"list",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatelist",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Rumah Zokog Four",
+									"type": "text"
+								},
+								{
+									"key": "deskripsi",
+									"value": "Jakarta",
+									"type": "text"
+								},
+								{
+									"key": "image_post",
+									"type": "file",
+									"src": "/C:/Users/Aditia Aria Nugraha/OneDrive/Documents/CV/Aditia-CV.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/updatelist/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"updatelist",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchlist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/searchlist?q=Jakarta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"searchlist"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Jakarta"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

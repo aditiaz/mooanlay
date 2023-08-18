@@ -18,5 +18,6 @@ func ListRoutes(e *echo.Group) {
 	e.GET("/lists", h.FindLists)
 	e.DELETE("/list/:id", h.DeleteList)
 	e.PATCH("/updatelist/:id", middleware.UploadMultipleFile(h.UpdateList))
+	e.GET("/searchlist", h.SearchLists)
 
 }
